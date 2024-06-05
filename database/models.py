@@ -1,9 +1,6 @@
 from sqlalchemy import Integer,String,Text,DECIMAL,ForeignKey
-from sqlalchemy.orm import (relationship,Mapped,mapped_column,
-                            DeclarativeBase,Session)
-from sqlalchemy.ext.asyncio import (create_async_engine,AsyncSession,
-                                    async_sessionmaker,AsyncAttrs,
-                                    AsyncEngine)
+from sqlalchemy.orm import relationship, Mapped, mapped_column, DeclarativeBase, Session
+from sqlalchemy.ext.asyncio import create_async_engine,AsyncSession, async_sessionmaker, AsyncAttrs, AsyncEngine
 
 from config import MYSQL_URL
 
@@ -46,7 +43,12 @@ async def models_main():
         await conn.run_sync(Base.metadata.create_all)
         
         
+        # async with async_session() as session:
+        #     department = Department(name = 'Sallers')
+        #     session.add(department)
+        #     await session.commit()
+
         async with async_session() as session:
-            department = Department(name = 'IT')
-            session.add(department)
+            rab = Rab(first_name = 'Peter', last_name = 'Parker', age = 27, salary = 60.00, email = 'SpiderMan34@gmail.com', phone = "+788578583848", address = "New York City", department_id =  3)
+            session.add(rab)
             await session.commit()
